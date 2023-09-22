@@ -14,9 +14,9 @@ public class Student {
 
     public Student()
     {
-        username = "";
-        password = "";
-        email = "";
+        username = "testuser";
+        password = "testpasswordhash.com";
+        email = "testuser@test.com";
     }
 
     public String getUsername() {
