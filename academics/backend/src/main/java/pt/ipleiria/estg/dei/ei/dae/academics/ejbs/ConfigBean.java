@@ -15,6 +15,9 @@ public class ConfigBean {
 
     @PostConstruct
     public void populateDB(){
-        studentBean.create(  );
+
+
+        studentBean.create();
+
     }
 }
