@@ -3,12 +3,16 @@ package pt.ipleiria.estg.dei.ei.dae.academics.dtos;
 import java.io.Serializable;
 
 public class StudentDTO implements Serializable {
-    protected String username, password, name, email;
-    public StudentDTO(String username, String password, String name, String email) {
+    protected String username, password, name, email, courseName;
+    protected long course_code;
+
+    public StudentDTO(String username, String password, String name, String email, long course_code, String courseName) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.course_code = course_code;
+        this.courseName = courseName;
     }
 
     public StudentDTO()
@@ -17,6 +21,24 @@ public class StudentDTO implements Serializable {
         password = "testpasswordhash.com";
         email = "testuser@test.com";
         name = "testuser";
+        course_code = 1;
+        courseName = "jg";
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public long getCourse_code() {
+        return course_code;
+    }
+
+    public void setCourse_code(long course_code) {
+        this.course_code = course_code;
     }
 
     public String getName() {

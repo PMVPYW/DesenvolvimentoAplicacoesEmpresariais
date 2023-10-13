@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.academics.ejbs;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 
 import java.util.List;
@@ -14,7 +15,8 @@ public class StudentBean {
     private EntityManager entityManager;
 
     public void create() {
-        var student = new Student("username_a", "pwd", "e@gmailc.om", "naome");
+        Course c = entityManager.find(Course.class, (long)1);
+        var student = new Student("username_a", "pwd", "e@gmailc.om", "naome", c);
         entityManager.persist(student);
     }
 

@@ -1,9 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 
 import java.io.Serializable;
@@ -15,14 +14,22 @@ import java.io.Serializable;
                 query = "SELECT s FROM Student s ORDER BY s.name" // JPQL
         )
 })
+@Table(name="students")
 public class Student implements Serializable {
     @Id
     protected String username;
 
+    @NotNull
     private String password;
-
+    @NotNull
     private String name;
+    @NotNull
+    @Email
     protected String email;
+    @ManyToOne
+    @JoinColumn(name = "course_code")
+    @NotNull
+    protected Course course;
 
     public String getName() {
         return new String(name);
@@ -59,11 +66,13 @@ public class Student implements Serializable {
         return new String(password);
     }
 
-    public Student(String username, String password, String email, String name) {
+    public Student(String username, String password, String email, String name, Course course) {
         this.username = new String(username);
         this.password = new String(password);
         this.email = new String(email);
         this.name = new String(name);
+        this.course = course;
+        course.addStudent(this);
     }
 
     public void setPassword(String password) {
@@ -84,5 +93,13 @@ public class Student implements Serializable {
             return;
         }
         this.email = email;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

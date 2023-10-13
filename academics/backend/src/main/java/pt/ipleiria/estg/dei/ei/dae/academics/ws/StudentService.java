@@ -20,11 +20,14 @@ public class StudentService {
     private StudentBean studentBean;
     // Converts an entity Student to a DTO Student class
     private StudentDTO toDTO(Student student) {
+        var c = student.getCourse();
         return new StudentDTO(
                 student.getUsername(),
                 student.getPassword(),
                 student.getName(),
-                student.getEmail()
+                student.getEmail(),
+                c.getCode(),
+                c.getName()
         );
     }
     // converts an entire list of entities into a list of DTOs
