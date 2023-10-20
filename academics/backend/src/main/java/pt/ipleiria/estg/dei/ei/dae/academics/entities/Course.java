@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.*;
+
 @Entity
 @NamedQueries({
         @NamedQuery(
@@ -21,19 +22,20 @@ public class Course implements Serializable {
     long code;
     @NotNull
     String name;
-        @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
     List<Student> students;
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+    List<Subject> subjects;
 
-    public Course()
-    {
-        this.students = new ArrayList<Student>( );
+    public Course() {
+        this.students = new ArrayList<Student>();
     }
 
-    public Course(long code, String name)
-    {
+    public Course(long code, String name) {
         this.code = code;
         this.name = name;
-        this.students = new ArrayList<Student>( );
+        this.students = new ArrayList<Student>();
+        this.subjects = new ArrayList<Subject>();
     }
 
     public long getCode() {
@@ -56,17 +58,25 @@ public class Course implements Serializable {
         return students;
     }
 
-    public void addStudent(Student s)
-    {
-        if (s == null)
-        {
+    public void addStudent(Student s) {
+        if (s == null) {
             return;
         }
         students.add(s);
     }
 
-    public void removeStudent(Student s)
-    {
+    public void removeStudent(Student s) {
         students.remove(s);
+    }
+
+    public void addSubject(Subject s) {
+        if (s == null) {
+            return;
+        }
+        subjects.add(s);
+    }
+
+    public void removeSubject(Subject s) {
+        subjects.remove(s);
     }
 }

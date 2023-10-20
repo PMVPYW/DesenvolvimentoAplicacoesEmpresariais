@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -30,6 +31,9 @@ public class Student implements Serializable {
     @JoinColumn(name = "course_code")
     @NotNull
     protected Course course;
+
+    @ManyToMany(mappedBy = "subjects")
+    protected List<Subject> subjects;
 
     public String getName() {
         return new String(name);
