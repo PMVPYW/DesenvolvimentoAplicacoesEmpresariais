@@ -21,8 +21,8 @@ public class Course implements Serializable {
     long code;
     @NotNull
     String name;
-    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
-    ArrayList<Student> students;
+        @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+    List<Student> students;
 
     public Course()
     {

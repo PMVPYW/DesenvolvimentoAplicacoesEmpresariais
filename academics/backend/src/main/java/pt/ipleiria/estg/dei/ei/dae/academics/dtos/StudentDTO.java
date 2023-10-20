@@ -33,7 +33,7 @@ public class StudentDTO implements Serializable {
         this.courseName = courseName;
     }
 
-    public long getCourse_code() {
+    public long getCourseCode() {
         return course_code;
     }
 

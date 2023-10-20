@@ -1,11 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
-import jakarta.ws.rs.GET;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.StudentBean;
 import jakarta.ejb.EJB;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 
@@ -38,5 +36,22 @@ public class StudentService {
     @Path("/") // means: the relative url path is “/api/students/”
     public List<StudentDTO> getAllStudents() {
         return toDTOs(studentBean.getAll());
+    }
+
+    @POST
+    @Path("/")
+    public Response createNewStudent (StudentDTO studentDTO){
+        studentBean.create(
+                studentDTO.getUsername(),
+                studentDTO.getPassword(),
+                studentDTO.getName(),
+                studentDTO.getEmail(),
+                studentDTO.getCourseCode()
+        );
+        Student newStudent = studentBean.find(studentDTO.getUsername());
+        if(newStudent == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        return
+                Response.status(Response.Status.CREATED).entity(toDTO(newStudent)).build();
     }
 }

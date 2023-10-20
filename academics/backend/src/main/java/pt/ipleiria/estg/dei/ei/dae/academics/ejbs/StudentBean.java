@@ -20,8 +20,20 @@ public class StudentBean {
         entityManager.persist(student);
     }
 
+    public void create(String username, String password, String name, String email, long courseCode) {
+        Course c = entityManager.find(Course.class, courseCode);
+        var student = new Student(username, password, email, name, c);
+        entityManager.persist(student);
+    }
+
+
     public List<Student> getAll() {
 // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
         return entityManager.createNamedQuery("getAllStudents", Student.class).getResultList();
+    }
+
+    public Student find(String username)
+    {
+        return entityManager.find(Student.class, username);
     }
 }
