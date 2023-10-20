@@ -12,3 +12,16 @@ Content-Type: application/json
 "password": "jd",
 "courseCode": 1
 }
+
+
+##### Courses
+GET http://localhost:8080/academics/api/courses
+Accept: application/json
+###
+POST http://localhost:8080/academics/api/courses
+Content-Type: application/json
+
+{
+  "code": 2,
+  "name" : "EEC"
+}
