@@ -6,11 +6,11 @@ POST http://localhost:8080/academics/api/students
 Content-Type: application/json
 
 {
-"email": "johndoe@mail.com",
+"email": "johnycxsddddoe@mail.com",
 "name": "John Doe",
-"username": "john",
+"username": "jdodsdhn",
 "password": "jd",
-"courseCode": 1
+"courseCode": 2
 }
 
 

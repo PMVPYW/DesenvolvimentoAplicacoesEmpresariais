@@ -15,9 +15,7 @@ public class StudentBean {
     private EntityManager entityManager;
 
     public void create() {
-        Course c = entityManager.find(Course.class, (long)1);
-        var student = new Student("username_a", "pwd", "e@gmailc.om", "naome", c);
-        entityManager.persist(student);
+
     }
 
     public void create(String username, String password, String name, String email, long courseCode) {

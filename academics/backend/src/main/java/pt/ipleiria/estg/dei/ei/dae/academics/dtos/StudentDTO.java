@@ -4,25 +4,20 @@ import java.io.Serializable;
 
 public class StudentDTO implements Serializable {
     protected String username, password, name, email, courseName;
-    protected long course_code;
+    protected long courseCode;
 
-    public StudentDTO(String username, String password, String name, String email, long course_code, String courseName) {
+    public StudentDTO(String username, String password, String name, String email, long courseCode, String courseName) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
-        this.course_code = course_code;
+        this.courseCode = courseCode;
         this.courseName = courseName;
     }
 
     public StudentDTO()
     {
-        username = "testuser";
-        password = "testpasswordhash.com";
-        email = "testuser@test.com";
-        name = "testuser";
-        course_code = 1;
-        courseName = "jg";
+
     }
 
     public String getCourseName() {
@@ -34,11 +29,11 @@ public class StudentDTO implements Serializable {
     }
 
     public long getCourseCode() {
-        return course_code;
+        return courseCode;
     }
 
-    public void setCourse_code(long course_code) {
-        this.course_code = course_code;
+    public void setCourseCode(long courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getName() {
