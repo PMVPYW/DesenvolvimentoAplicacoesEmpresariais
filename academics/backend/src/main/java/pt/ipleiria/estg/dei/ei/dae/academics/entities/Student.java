@@ -13,6 +13,10 @@ import java.util.List;
         @NamedQuery(
                 name = "getAllStudents",
                 query = "SELECT s FROM Student s ORDER BY s.name" // JPQL
+        ),
+        @NamedQuery(
+                name = "getAllSubjects",
+                query = "SELECT s FROM Subject  s ORDER BY course.name, scholarYear, courseYear, name"
         )
 })
 @Table(name="students")
@@ -32,7 +36,7 @@ public class Student implements Serializable {
     @NotNull
     protected Course course;
 
-    @ManyToMany(mappedBy = "subjects")
+    @ManyToMany(mappedBy = "students")
     protected List<Subject> subjects;
 
     public String getName() {

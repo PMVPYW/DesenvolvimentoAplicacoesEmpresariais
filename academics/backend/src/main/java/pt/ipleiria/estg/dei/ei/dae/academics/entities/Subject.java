@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
@@ -9,7 +10,9 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "subjects")
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "course_code", "scholar_year"})
+        )
 public class Subject implements Serializable {
     @Id
     private long code;
@@ -26,10 +29,19 @@ public class Subject implements Serializable {
     @Column(name = "scholar_year")
     private long scholarYear;
     @ManyToMany
+    @JoinTable(
+            name = "subjects_students",
+            joinColumns = @JoinColumn(
+                    name = "subject_code",
+                    referencedColumnName = "code"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "student_username",
+                    referencedColumnName = "username"
+            ))
     private List<Student> students;
 
-    public Subject()
-    {
+    public Subject() {
         students = new ArrayList<>();
     }
 
@@ -82,8 +94,7 @@ public class Subject implements Serializable {
     }
 
     public void addStudent(Student s) {
-        if (s == null)
-        {
+        if (s == null) {
             return;
         }
         this.students.add(s);
