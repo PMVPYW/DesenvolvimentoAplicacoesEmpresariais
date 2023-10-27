@@ -110,4 +110,19 @@ public class Student implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void addSubject(Subject s) {
+        if (!subjects.contains(s)) {
+            subjects.add(s);
+        }
+    }
+
+    public void removeSubject(Subject s)
+    {
+        subjects.remove(s);
+    }
 }

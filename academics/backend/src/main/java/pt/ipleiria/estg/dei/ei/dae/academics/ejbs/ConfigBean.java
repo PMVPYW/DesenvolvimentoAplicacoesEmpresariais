@@ -15,12 +15,21 @@ public class ConfigBean {
     private StudentBean studentBean;
     @EJB
     private CourseBean courseBean;
+    @EJB
+    private SubjectBean subjectBean;
 
     @PostConstruct
     public void populateDB(){
 
         courseBean.create();
         studentBean.create();
+        subjectBean.create();
+
+        courseBean.create((long)2, "msc");
+        subjectBean.create((long)2, "c2", (long)2, 1, 2070);
+        studentBean.create("m", "sac", "cndis", "cd@tu.pt", (long)2);
+        studentBean.enrollStudentInSubject("m", (long)2);
+        studentBean.enrollStudentInSubject("ALAL", 1);
 
     }
 }

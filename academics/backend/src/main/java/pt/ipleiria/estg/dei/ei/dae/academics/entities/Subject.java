@@ -39,10 +39,10 @@ public class Subject implements Serializable {
                     name = "student_username",
                     referencedColumnName = "username"
             ))
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();;
 
     public Subject() {
-        students = new ArrayList<>();
+
     }
 
     public Subject(long code, String name, Course course, int courseYear, long scholarYear) {
@@ -102,5 +102,10 @@ public class Subject implements Serializable {
 
     public void removeStudent(Student s) {
         this.students.remove(s);
+    }
+
+    public List<Student> getStudents() {
+
+        return this.students;
     }
 }

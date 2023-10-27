@@ -79,4 +79,17 @@ public class Course implements Serializable {
     public void removeSubject(Subject s) {
         subjects.remove(s);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return code == course.code && Objects.equals(name, course.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, name);
+    }
 }
