@@ -12,12 +12,6 @@ public class TeacherBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create()
-    {
-        long id = 1;
-        var c = new Teacher("Username_sample", "cask", "name", "cksa@mail.pt", "office 1");
-        entityManager.persist(c);
-    }
 
     public void create(String username, String password, String name, String email, String office)
     {

@@ -16,10 +16,6 @@ public class StudentBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create() {
-        this.create("ALAL", "cnils", "nsadcndsi", "mxd@mail.tuga", 1);
-    }
-
     public void create(String username, String password, String name, String email, long courseCode) {
         Course c = entityManager.find(Course.class, courseCode);
         var student = new Student(username, password, email, name, c);

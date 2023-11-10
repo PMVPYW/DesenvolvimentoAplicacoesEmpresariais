@@ -13,12 +13,6 @@ import java.util.List;
 public class CourseBean {
     @PersistenceContext
     private EntityManager entityManager;
-    public void create()
-    {
-        long id = 1;
-        var c = new Course((long)1, "EI");
-        entityManager.persist(c);
-    }
 
     public void create(long code, String name)
     {

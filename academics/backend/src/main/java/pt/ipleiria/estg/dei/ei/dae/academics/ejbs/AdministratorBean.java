@@ -14,13 +14,6 @@ public class AdministratorBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create()
-    {
-        long id = 1;
-        Administrator c = new Administrator("Username_sample", "cask", "nsajke", "cksa@mail.pt");
-        entityManager.persist(c);
-    }
-
     public void create(String username, String password, String name, String email)
     {
         var v = new Administrator(username, password, name, email);

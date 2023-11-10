@@ -24,9 +24,9 @@ public class ConfigBean {
     @PostConstruct
     public void populateDB(){
 
-        courseBean.create();
-        studentBean.create();
-        subjectBean.create();
+        courseBean.create((long)1, "EI");
+        studentBean.create("ALAL", "cnils", "nsadcndsi", "mxd@mail.tuga", 1);
+        subjectBean.create(1, "tuga", 1, 1, 2070);
 
         courseBean.create((long)2, "msc");
         subjectBean.create((long)2, "c2", (long)2, 1, 2070);
@@ -34,8 +34,8 @@ public class ConfigBean {
         studentBean.enrollStudentInSubject("m", (long)2);
         studentBean.enrollStudentInSubject("ALAL", 1);
 
-        adminBean.create();
-        teacherBean.create();
+        adminBean.create("Username_sample_admin", "cask", "nsajke", "cksa@mail.pt");
+        teacherBean.create("Username_sample_teacher", "cask", "name", "cksa@mail.pt", "office 1");
 
 
     }

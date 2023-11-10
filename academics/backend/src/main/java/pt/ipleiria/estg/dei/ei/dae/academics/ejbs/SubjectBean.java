@@ -15,9 +15,6 @@ public class SubjectBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create() {
-        this.create(1, "tuga", 1, 1, 2070);
-    }
 
     public void create(long code, String name, long course_code, int courseYear, long scholarYear) {
         Course c = entityManager.find(Course.class, course_code);
