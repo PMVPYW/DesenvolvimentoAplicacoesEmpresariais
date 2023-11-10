@@ -16,6 +16,7 @@ import java.util.List;
 public class Subject implements Serializable {
     @Id
     private long code;
+
     @NotNull
     private String name;
     @ManyToOne
@@ -28,6 +29,19 @@ public class Subject implements Serializable {
     @NotNull
     @Column(name = "scholar_year")
     private long scholarYear;
+
+    @ManyToMany
+    @JoinTable(
+            name = "subjects_teacher",
+            joinColumns = @JoinColumn(
+                    name = "subject_code",
+                    referencedColumnName = "code"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "teacher_username",
+                    referencedColumnName = "username"
+            ))
+    private List<Teacher> teachers = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "subjects_students",

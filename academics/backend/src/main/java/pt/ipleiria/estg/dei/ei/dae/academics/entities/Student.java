@@ -19,7 +19,6 @@ import java.util.List;
                 query = "SELECT s FROM Subject  s ORDER BY course.name, scholarYear, courseYear, name"
         )
 })
-@Table(name="students")
 public class Student implements Serializable {
     @Id
     protected String username;
