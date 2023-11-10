@@ -4,7 +4,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 
 
 @Startup
@@ -17,6 +16,10 @@ public class ConfigBean {
     private CourseBean courseBean;
     @EJB
     private SubjectBean subjectBean;
+    @EJB
+    private AdministratorBean adminBean;
+    @EJB
+    private TeacherBean teacherBean;
 
     @PostConstruct
     public void populateDB(){
@@ -30,6 +33,10 @@ public class ConfigBean {
         studentBean.create("m", "sac", "cndis", "cd@tu.pt", (long)2);
         studentBean.enrollStudentInSubject("m", (long)2);
         studentBean.enrollStudentInSubject("ALAL", 1);
+
+        adminBean.create();
+        teacherBean.create();
+
 
     }
 }

@@ -1,5 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.entities;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Administrator extends User{
     public Administrator() {
     }
