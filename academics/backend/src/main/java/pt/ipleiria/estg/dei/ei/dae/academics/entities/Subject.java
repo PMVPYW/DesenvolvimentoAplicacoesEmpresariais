@@ -16,7 +16,8 @@ import java.util.List;
 public class Subject implements Serializable {
     @Id
     private long code;
-
+    @Version
+    private int version;
     @NotNull
     private String name;
     @ManyToOne

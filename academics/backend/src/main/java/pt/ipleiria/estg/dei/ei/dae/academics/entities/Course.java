@@ -20,6 +20,8 @@ import java.util.*;
 public class Course implements Serializable {
     @Id
     long code;
+    @Version
+    private int version;
     @NotNull
     String name;
     @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)

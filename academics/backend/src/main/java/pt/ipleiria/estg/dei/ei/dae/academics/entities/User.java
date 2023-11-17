@@ -11,6 +11,8 @@ import jakarta.validation.constraints.NotNull;
 public class User {
     @Id
     private String username;
+    @Version
+    private int version;
     @NotNull
     private String password;
     @NotNull
