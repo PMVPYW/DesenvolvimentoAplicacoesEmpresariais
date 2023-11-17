@@ -4,6 +4,6 @@ public class MyEntityNotFoundException extends Exception{
     private String msg;
     public MyEntityNotFoundException(String message)
     {
-        msg = message;
+        super(message);
     }
 }

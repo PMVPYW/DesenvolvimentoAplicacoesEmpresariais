@@ -22,16 +22,25 @@ public class ConfigBean {
     private TeacherBean teacherBean;
 
     @PostConstruct
-    public void populateDB(){
+    public void populateDB() {
 
-        courseBean.create((long)1, "EI");
-        studentBean.create("ALAL", "cnils", "nsadcndsi", "mxd@mail.tuga", 1);
+        courseBean.create((long) 1, "EI");
+        try {
+            studentBean.create("ALAL", "cnils", "nsadcndsi", "mxd@mail.tuga", 1);
+        } catch (Exception e) {
+            System.err.println("Some exception happened while creating student");
+        }
+
         subjectBean.create(1, "tuga", 1, 1, 2070);
 
-        courseBean.create((long)2, "msc");
-        subjectBean.create((long)2, "c2", (long)2, 1, 2070);
-        studentBean.create("m", "sac", "cndis", "cd@tu.pt", (long)2);
-        studentBean.enrollStudentInSubject("m", (long)2);
+        courseBean.create((long) 2, "msc");
+        subjectBean.create((long) 2, "c2", (long) 2, 1, 2070);
+        try {
+            studentBean.create("m", "sac", "cndis", "cd@tu.pt", (long) 2);
+        } catch (Exception e) {
+            System.err.println("Some exception happened while creating student");
+        }
+        studentBean.enrollStudentInSubject("m", (long) 2);
         studentBean.enrollStudentInSubject("ALAL", 1);
 
         adminBean.create("Username_sample_admin", "cask", "nsajke", "cksa@mail.pt");

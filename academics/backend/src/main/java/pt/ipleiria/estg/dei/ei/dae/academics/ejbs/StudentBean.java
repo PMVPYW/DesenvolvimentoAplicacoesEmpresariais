@@ -4,10 +4,13 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 
@@ -17,8 +20,25 @@ public class StudentBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(String username, String password, String name, String email, long courseCode) {
+    public boolean exists(String username) {
+        Query query = entityManager.createQuery(
+                "SELECT COUNT(s.username) FROM Student s WHERE s.username = :username",
+                Long.class
+        );
+        query.setParameter("username", username);
+        return (Long)query.getSingleResult() > 0L;
+    }
+
+    public void create(String username, String password, String name, String email, long courseCode) throws MyEntityExistsException, MyEntityNotFoundException {
+        if (exists(username))
+        {
+            throw new MyEntityExistsException("That username is already present in db");
+        }
         Course c = entityManager.find(Course.class, courseCode);
+        if (c == null)
+        {
+            throw new MyEntityNotFoundException("That course does not exist");
+        }
         var student = new Student(username, password, email, name, c);
         entityManager.persist(student);
     }
