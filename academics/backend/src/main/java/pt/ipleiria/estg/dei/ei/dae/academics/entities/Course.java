@@ -17,11 +17,9 @@ import java.util.*;
         name = "courses",
         uniqueConstraints = @UniqueConstraint(columnNames = {"name"})
 )
-public class Course implements Serializable {
+public class Course extends Versionable implements Serializable {
     @Id
     long code;
-    @Version
-    private int version;
     @NotNull
     String name;
     @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)

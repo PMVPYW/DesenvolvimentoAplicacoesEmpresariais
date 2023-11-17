@@ -13,11 +13,9 @@ import java.util.List;
 @Table(
         uniqueConstraints = @UniqueConstraint(columnNames = {"name", "course_code", "scholar_year"})
         )
-public class Subject implements Serializable {
+public class Subject extends Versionable implements Serializable {
     @Id
     private long code;
-    @Version
-    private int version;
     @NotNull
     private String name;
     @ManyToOne
