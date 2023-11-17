@@ -67,6 +67,23 @@ public class StudentService {
                 Response.status(Response.Status.CREATED).entity(toDTO(newStudent)).build();
     }
 
+    @PUT
+    @Path("{username}")
+    public Response updateStudent (@PathParam("username") String username, StudentDTO studentDTO){
+        studentBean.update(
+                studentDTO.getUsername(),
+                studentDTO.getPassword(),
+                studentDTO.getName(),
+                studentDTO.getEmail(),
+                studentDTO.getCourseCode()
+        );
+        Student newStudent = studentBean.find(studentDTO.getUsername());
+        if(newStudent == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        return
+                Response.status(Response.Status.CREATED).entity(toDTO(newStudent)).build();
+    }
+
     @GET
     @Path("{username}")
     public Response getStudentDetails(@PathParam("username") String username) {

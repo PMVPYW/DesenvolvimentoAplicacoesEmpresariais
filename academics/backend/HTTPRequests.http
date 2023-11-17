@@ -8,11 +8,22 @@ Content-Type: application/json
 {
 "email": "johnycxsddddoe@mail.com",
 "name": "John Doe",
-"username": "jdodsdhn",
+"username": "jdodsdhns",
 "password": "jd",
 "courseCode": 2
 }
 
+###
+PUT http://localhost:8080/academics/api/students/jdodsdhns
+Content-Type: application/json
+
+{
+"email": "johnycxsddddoe@mail.com",
+"name": "Jonhy Doi",
+"username": "jdodsdhns",
+"password": "jd",
+"courseCode": 2
+}
 
 ##### Courses
 GET http://localhost:8080/academics/api/courses
