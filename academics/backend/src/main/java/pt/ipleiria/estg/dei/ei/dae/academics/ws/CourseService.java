@@ -9,6 +9,8 @@ import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.CourseBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,19 +31,23 @@ public class CourseService {
     }
 
     // converts an entire list of entities into a list of DTOs
-    private List<CourseDTO> toDTOs(List<Course> courses) {
+    private List<CourseDTO> toDTOs(List<Course> courses)
+    throws MyEntityNotFoundException{
         return courses.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
-    public List<CourseDTO> getAllStudents() {
+    public List<CourseDTO> getAllStudents()
+            throws MyEntityNotFoundException
+    {
         return toDTOs(courseBean.getAllCourses());
     }
 
     @POST
     @Path("/")
-    public Response createNewStudent(CourseDTO courseDTO) {
+    public Response createNewStudent(CourseDTO courseDTO)
+            throws MyEntityExistsException, MyEntityNotFoundException {
         courseBean.create(
                 courseDTO.getCode(),
                 courseDTO.getName()

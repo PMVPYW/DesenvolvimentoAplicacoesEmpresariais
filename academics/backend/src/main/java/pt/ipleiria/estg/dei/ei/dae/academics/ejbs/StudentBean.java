@@ -5,10 +5,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
@@ -29,7 +31,8 @@ public class StudentBean {
         return (Long)query.getSingleResult() > 0L;
     }
 
-    public void create(String username, String password, String name, String email, long courseCode) throws MyEntityExistsException, MyEntityNotFoundException {
+    public void create(String username, String password, String name, String email, long courseCode)
+            throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         if (exists(username))
         {
             throw new MyEntityExistsException("That username is already present in db");
@@ -39,8 +42,12 @@ public class StudentBean {
         {
             throw new MyEntityNotFoundException("That course does not exist");
         }
-        var student = new Student(username, password, email, name, c);
-        entityManager.persist(student);
+        try {
+            var student = new Student(username, password, email, name, c);
+            entityManager.persist(student);
+        } catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(e);
+        }
     }
 
 

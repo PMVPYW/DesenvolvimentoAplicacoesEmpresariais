@@ -55,7 +55,7 @@ public class StudentService {
     @POST
     @Path("/")
     public Response create(StudentDTO studentDTO)
-            throws MyEntityExistsException, MyEntityNotFoundException {
+            throws MyEntityNotFoundException, MyEntityExistsException {
         studentBean.create(
                 studentDTO.getUsername(),
                 studentDTO.getPassword(),
@@ -69,7 +69,8 @@ public class StudentService {
 
     @PUT
     @Path("{username}")
-    public Response updateStudent (@PathParam("username") String username, StudentDTO studentDTO){
+    public Response updateStudent (@PathParam("username") String username, StudentDTO studentDTO)
+            throws MyEntityNotFoundException, MyEntityExistsException{
         studentBean.update(
                 studentDTO.getUsername(),
                 studentDTO.getPassword(),
@@ -86,7 +87,8 @@ public class StudentService {
 
     @GET
     @Path("{username}")
-    public Response getStudentDetails(@PathParam("username") String username) {
+    public Response getStudentDetails(@PathParam("username") String username)
+            throws MyEntityNotFoundException{
         Student student = studentBean.find(username);
         if (student != null) {
             return Response.ok(toDTO(student)).build();
@@ -98,7 +100,8 @@ public class StudentService {
 
     @GET
     @Path("{username}/subjects")
-    public Response getStudentSubjects(@PathParam("username") String username) {
+    public Response getStudentSubjects(@PathParam("username") String username)
+            throws MyEntityNotFoundException{
         var student = studentBean.findStudentWithSubjects(username);
         if (student != null) {
             var dtos = this.toDTOsSubject(student.getSubjects());
