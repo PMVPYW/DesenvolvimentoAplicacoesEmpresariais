@@ -8,6 +8,8 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.core.MediaType;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,26 +54,17 @@ public class StudentService {
 
     @POST
     @Path("/")
-    public Response createNewStudent (StudentDTO studentDTO){
-        try
-        {
-            studentBean.create(
-                    studentDTO.getUsername(),
-                    studentDTO.getPassword(),
-                    studentDTO.getName(),
-                    studentDTO.getEmail(),
-                    studentDTO.getCourseCode()
-            );
-        } catch (Exception e)
-        {
-            System.out.println("Error creating a student!");
-        }
-
-        Student newStudent = studentBean.find(studentDTO.getUsername());
-        if(newStudent == null)
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        return
-                Response.status(Response.Status.CREATED).entity(toDTO(newStudent)).build();
+    public Response create(StudentDTO studentDTO)
+            throws MyEntityExistsException, MyEntityNotFoundException {
+        studentBean.create(
+                studentDTO.getUsername(),
+                studentDTO.getPassword(),
+                studentDTO.getName(),
+                studentDTO.getEmail(),
+                studentDTO.getCourseCode()
+        );
+        Student student = studentBean.find(studentDTO.getUsername());
+        return Response.status(Response.Status.CREATED).entity(toDTO(student)).build();
     }
 
     @PUT

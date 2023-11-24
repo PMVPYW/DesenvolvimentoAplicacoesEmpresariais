@@ -5,6 +5,8 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 
+import java.util.logging.Logger;
+
 
 @Startup
 @Singleton
@@ -21,6 +23,8 @@ public class ConfigBean {
     @EJB
     private TeacherBean teacherBean;
 
+    private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
+
     @PostConstruct
     public void populateDB() {
 
@@ -28,7 +32,7 @@ public class ConfigBean {
         try {
             studentBean.create("ALAL", "cnils", "nsadcndsi", "mxd@mail.tuga", 1);
         } catch (Exception e) {
-            System.err.println("Some exception happened while creating student");
+            logger.severe(e.getMessage());
         }
 
         subjectBean.create(1, "tuga", 1, 1, 2070);
@@ -38,7 +42,7 @@ public class ConfigBean {
         try {
             studentBean.create("m", "sac", "cndis", "cd@tu.pt", (long) 2);
         } catch (Exception e) {
-            System.err.println("Some exception happened while creating student");
+            logger.severe(e.getMessage());
         }
         studentBean.enrollStudentInSubject("m", (long) 2);
         studentBean.enrollStudentInSubject("ALAL", 1);
