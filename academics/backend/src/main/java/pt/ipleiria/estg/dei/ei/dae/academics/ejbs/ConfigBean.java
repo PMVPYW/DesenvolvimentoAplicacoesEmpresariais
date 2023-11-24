@@ -42,7 +42,6 @@ public class ConfigBean {
         }
         studentBean.enrollStudentInSubject("m", (long) 2);
         studentBean.enrollStudentInSubject("ALAL", 1);
-
         adminBean.create("Username_sample_admin", "cask", "nsajke", "cksa@mail.pt");
         teacherBean.create("Username_sample_teacher", "cask", "name", "cksa@mail.pt", "office 1");
 

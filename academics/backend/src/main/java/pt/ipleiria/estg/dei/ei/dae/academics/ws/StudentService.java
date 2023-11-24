@@ -53,13 +53,20 @@ public class StudentService {
     @POST
     @Path("/")
     public Response createNewStudent (StudentDTO studentDTO){
-        studentBean.create(
-                studentDTO.getUsername(),
-                studentDTO.getPassword(),
-                studentDTO.getName(),
-                studentDTO.getEmail(),
-                studentDTO.getCourseCode()
-        );
+        try
+        {
+            studentBean.create(
+                    studentDTO.getUsername(),
+                    studentDTO.getPassword(),
+                    studentDTO.getName(),
+                    studentDTO.getEmail(),
+                    studentDTO.getCourseCode()
+            );
+        } catch (Exception e)
+        {
+            System.out.println("Error creating a student!");
+        }
+
         Student newStudent = studentBean.find(studentDTO.getUsername());
         if(newStudent == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
